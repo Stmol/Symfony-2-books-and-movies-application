@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Book creation</h1>
+      {{ include('AxiomaBookBundle:Book:form.html.twig', { 'form': form }) }}
+    </div>
+  </div>
+{% endblock %}

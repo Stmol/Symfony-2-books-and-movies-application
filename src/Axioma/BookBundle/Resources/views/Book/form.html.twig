@@ -1,0 +1,73 @@
+{% macro widget_prototype(authors) %}
+    <div class="form-group">
+      {{ form_errors(authors) }}
+      {{ form_widget(authors, { 'attr': { 'class': 'form-control' } }) }}
+      <a class="remove-author" href="#">{{ 'actions.remove_author'|trans }}</a>
+    </div>
+{% endmacro %}
+
+{{ form_errors(form) }}
+
+{{ form_start(form, { 'attr': { 'novalidate': 'novalidate' } }) }}
+  <div class="form-group">
+    {{ form_errors(form.title) }}
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { 'attr': { 'class': 'form-control' } }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_errors(form.description) }}
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, { 'attr': { 'class': 'form-control' } }) }}
+  </div>
+
+  <div class="form-group" >
+    {{ form_errors(form.authors) }}
+    {{ form_label(form.authors) }}
+
+    <div id="authors-list" data-prototype="{{ _self.widget_prototype(form.authors.vars.prototype)|e }}">
+      {% for authorFiled in form.authors %}
+        {{ _self.widget_prototype(authorFiled) }}
+      {% endfor %}
+    </div>
+    <a href="#" id="add-author">{{ 'actions.add_author'|trans }}</a>
+    {% do form.authors.setRendered %}
+  </div>
+
+  {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}
+
+{{ form_end(form) }}
+
+<script type="text/javascript">
+  var authorsCount = '{{ form.authors|length }}';
+
+  var removeAuthorField = function (e) {
+    e.preventDefault();
+
+    $(this).parent().remove();
+  };
+
+  var addAuthorField = function (e) {
+    e.preventDefault();
+
+    var authorsList = $('#authors-list');
+
+    var newField = authorsList.data('prototype');
+    newField = newField.replace(/__name__/g, authorsCount);
+    authorsCount++;
+
+    $(newField)
+        .children('div > a.remove-author')
+        .on('click', removeAuthorField)
+        .end()
+        .appendTo(authorsList);
+  };
+
+  $(function () {
+    $('#add-author').on('click', addAuthorField);
+
+    $('#authors-list').find('a.remove-author').each(function () {
+      $(this).on('click', removeAuthorField);
+    });
+  });
+</script>

@@ -1,0 +1,49 @@
+books_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:index"
+
+books_new:
+    path: /new
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:new"
+
+books_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:show"
+    requirements:
+        id: \d+
+
+books_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:create"
+
+books_edit:
+    path: /{id}/edit
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:edit"
+    requirements:
+        id: \d+
+
+books_update:
+    path: /{id}
+    methods: [POST,PUT]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:update"
+    requirements:
+        id: \d+
+
+books_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: "AxiomaBookBundle:Book:delete"
+    requirements:
+        id: \d+

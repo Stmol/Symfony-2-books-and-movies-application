@@ -1,0 +1,10 @@
+parameters:
+    axioma.entity.book.class: Axioma\BookBundle\Entity\Book
+    axioma.manager.book.class: Axioma\BookBundle\EntityManager\BookManager
+
+services:
+    axioma.manager.book:
+        class: %axioma.manager.book.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %axioma.entity.book.class%

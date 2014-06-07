@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+  <a href="{{ path('books_new') }}">{{ 'actions.add'|trans }}</a>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'book.title'|trans }}</th>
+      <th>{{ 'book.description'|trans }}</th>
+      <th>{{ 'book.authors'|trans }}</th>
+      <th>{{ 'book.tags'|trans }}</th>
+      <th>{{ 'book.actions'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+      <td>{{ book.id }}</td>
+      <td>
+        <a href="{{ path('books_show', { 'id': book.id }) }}">
+          {{ book.title }}
+        </a>
+      </td>
+      <td>{{ book.description }}</td>
+      <td>
+        {% if book.authors|length > 0 %}
+          {% for author in book.authors %}
+            {{ author }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        {% endif %}
+      </td>
+      <td>-</td>
+      <td>
+        <a style="float: left; margin-right: 7px;" href="{{ path('books_edit', { 'id': book.id }) }}">{{ 'actions.edit'|trans }}</a>
+        {{ render(controller('AxiomaBookBundle:Book:deleteForm', { 'id': book.id })) }}
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

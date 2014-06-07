@@ -1,0 +1,4 @@
+Axioma\BookBundle\Entity\Book:
+    properties:
+        title:
+            - NotBlank: { message: "book.title.not_blank" }

@@ -1,0 +1,4 @@
+axioma_book:
+    resource: "@AxiomaBookBundle/Resources/config/routing.yml"
+    prefix:   /
+

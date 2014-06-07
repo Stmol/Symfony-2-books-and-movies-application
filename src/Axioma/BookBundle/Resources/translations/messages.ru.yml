@@ -1,0 +1,18 @@
+book:
+    title: Заголовок
+    description: Описание
+    authors: Авторы
+    tags: Теги
+    actions: Действия
+
+actions:
+    add: Добавить книгу
+    edit: Изменить
+    create: Добавить
+    save: Сохранить
+    delete: Удалить
+    remove_author: Удалить автора
+    add_author: Добавить автора
+
+h:
+    authors: Авторы

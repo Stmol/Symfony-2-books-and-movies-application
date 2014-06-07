@@ -1,4 +1,4 @@
-!app/cache/.gitkeep
+!app/cache/.gitkeep   
 !app/logs/.gitkeep
 /.idea/
 /app/bootstrap.php.cache
@@ -9,4 +9,7 @@
 /build/
 /composer.phar
 /vendor/
+/web/assetic/
 /web/bundles/
+/web/css/
+/web/js/
