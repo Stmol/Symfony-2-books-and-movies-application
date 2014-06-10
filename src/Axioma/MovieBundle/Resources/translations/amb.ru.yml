@@ -1,0 +1,19 @@
+actions:
+    add: Добавить фильм
+    edit: Изменить
+    delete: Удалить
+    save: Сохранить
+    add_actor: Добавить актера
+    remove_actor: Удалить актера
+
+movie:
+    title: Название
+    description: Описание
+    actions: Действия
+    actors: Актеры
+    quality: Качество
+
+h:
+    actors: Актеры
+    add: Добавить фильм
+    edit: Редактировать фильм

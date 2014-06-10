@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain "amb" %}
+
+{% block body -%}
+  <a href="{{ path('movies_new') }}">{{ 'actions.add'|trans }}</a>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>{{ 'movie.title'|trans }}</th>
+      <th>{{ 'movie.description'|trans }}</th>
+      <th>{{ 'movie.actions'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for movie in movies %}
+      <tr>
+        <td>{{ movie.id }}</td>
+        <td>
+          <a href="{{ path('movies_show', { 'id': movie.id }) }}">{{ movie.title }}</a>
+        </td>
+        <td>{{ movie.description }}</td>
+        <td>
+          <a style="float: left; margin-right: 7px;" href="{{ path('movies_edit', { 'id': movie.id }) }}">{{ 'actions.edit'|trans }}</a>
+          {{ render(controller('AxiomaMovieBundle:Movie:deleteForm', { 'id': movie.id })) }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

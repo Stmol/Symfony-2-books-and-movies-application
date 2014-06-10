@@ -1,0 +1,83 @@
+{% trans_default_domain "amb" %}
+
+{% macro widget_prototype(actors) %}
+  <div class="form-group">
+    {{ form_errors(actors) }}
+    {{ form_widget(actors, { 'attr': { 'class': 'form-control' } }) }}
+    <a class="remove-actor" href="#">{{ 'actions.remove_actor'|trans }}</a>
+  </div>
+{% endmacro %}
+
+{{ form_errors(form) }}
+
+{{ form_start(form, { 'attr': { 'novalidate': 'novalidate' } }) }}
+
+  <div class="form-group">
+    {{ form_errors(form.title) }}
+    {{ form_label(form.title, 'movie.title'|trans) }}
+    {{ form_widget(form.title, { 'attr': { 'class': 'form-control' } }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_errors(form.description) }}
+    {{ form_label(form.description, 'movie.description'|trans) }}
+    {{ form_widget(form.description, { 'attr': { 'class': 'form-control' } }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_errors(form.quality) }}
+    {{ form_label(form.quality, 'movie.quality'|trans) }}
+    {{ form_widget(form.quality, { 'attr': { 'class': 'form-control' } }) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_errors(form.actors) }}
+    {{ form_label(form.actors, 'movie.actors'|trans) }}
+
+    <div id="actors-list" data-prototype="{{ _self.widget_prototype(form.actors.vars.prototype)|e }}">
+      {% for actorField in form.actors %}
+        {{ _self.widget_prototype(actorField) }}
+      {% endfor %}
+    </div>
+    <a href="#" id="add-actor">{{ 'actions.add_actor'|trans }}</a>
+    {% do form.actors.setRendered %}
+  </div>
+
+  {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}
+
+{{ form_end(form) }}
+
+<script type="text/javascript">
+  var actorsCount = '{{ form.actors|length }}';
+
+  var removeActorField = function (e) {
+    e.preventDefault();
+
+    $(this).parent().remove();
+  };
+
+  var addActorField = function (e) {
+    e.preventDefault();
+
+    var actorsList = $('#actors-list');
+
+    var newField = actorsList.data('prototype');
+    newField = newField.replace(/__name__/g, actorsCount);
+    actorsCount++;
+
+    $(newField)
+        .children('div > a.remove-actor')
+        .on('click', removeActorField)
+        .end()
+        .appendTo(actorsList);
+  };
+
+  $(function () {
+    $('#add-actor').on('click', addActorField);
+
+    $('#actors-list').find('a.remove-actor').each(function () {
+      $(this).on('click', removeActorField);
+    });
+  });
+</script>
+

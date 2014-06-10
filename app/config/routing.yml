@@ -1,3 +1,7 @@
+axioma_movie:
+    resource: "@AxiomaMovieBundle/Resources/config/routing.yml"
+    prefix:   /
+
 axioma_book:
     resource: "@AxiomaBookBundle/Resources/config/routing.yml"
     prefix:   /

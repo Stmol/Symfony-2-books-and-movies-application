@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain "amb" %}
+
+{% block body -%}
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{ 'h.add'|trans }}</h2>
+      {{ include('AxiomaMovieBundle:Movie:form.html.twig', { 'form': form }) }}
+    </div>
+  </div>
+{% endblock %}

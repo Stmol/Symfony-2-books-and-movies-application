@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain "amb" %}
+
+{% block body -%}
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{ movie.title }}</h2>
+
+      <p class="lead">
+        {{ movie.description|default('') }}
+      </p>
+
+      <p>
+        <strong>{{ 'movie.quality'|trans }}: </strong>
+        {{ movie.quality }}
+      </p>
+      {% if movie.actors|length > 0 %}
+        <h4>{{ 'h.actors'|trans }}</h4>
+
+        <ul class="list-unstyled">
+          {% for actor in movie.actors %}
+            <li>{{ actor }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <a href="{{ path('movies_edit', { 'id': movie.id }) }}">
+        {{ 'actions.edit'|trans }}
+      </a>
+    </div>
+  </div>
+{% endblock %}

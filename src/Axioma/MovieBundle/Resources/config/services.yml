@@ -1,0 +1,10 @@
+parameters:
+    axioma.entity.movie.class: Axioma\MovieBundle\Entity\Movie
+    axioma.manager.movie.class: Axioma\MovieBundle\EntityManager\MovieManager
+
+services:
+    axioma.manager.movie:
+        class: %axioma.manager.movie.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %axioma.entity.movie.class%

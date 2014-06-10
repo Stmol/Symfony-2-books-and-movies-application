@@ -1,0 +1,6 @@
+Axioma\MovieBundle\Entity\Movie:
+    properties:
+        title:
+            - NotBlank: { message: "movie.title.not_blank" }
+        quality:
+            - Choice: { callback: getQualities, message: "movie.quality.choice" }

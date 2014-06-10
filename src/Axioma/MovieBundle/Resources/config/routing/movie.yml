@@ -1,0 +1,49 @@
+movies_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:index"
+
+movies_new:
+    path: /new
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:new"
+
+movies_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:show"
+    requirements:
+        id: \d+
+
+movies_edit:
+    path: /{id}/edit
+    methods: [GET]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:edit"
+    requirements:
+        id: \d+
+
+movies_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:create"
+
+movies_update:
+    path: /{id}
+    methods: [POST, PUT]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:update"
+    requirements:
+        id: \d+
+
+movies_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: "AxiomaMovieBundle:Movie:delete"
+    requirements:
+        id: \d+

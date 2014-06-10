@@ -1,0 +1,4 @@
+axioma_movie_movies:
+    resource: "@AxiomaMovieBundle/Resources/config/routing/movie.yml"
+    prefix:   /movies
+
