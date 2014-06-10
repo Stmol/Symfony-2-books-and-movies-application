@@ -73,10 +73,11 @@ class MovieController extends Controller
     {
         $movie = $this->getMovieManager()->createMovie();
         $form = $this->createCreateForm($movie);
+        $tags = $this->get('axioma.manager.tag')->findTagsLimited();
 
         return $this->render('AxiomaMovieBundle:Movie:new.html.twig', [
-            'movie' => $movie,
-            'form'  => $form->createView(),
+            'tags' => $tags,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -93,10 +94,11 @@ class MovieController extends Controller
         }
 
         $form = $this->createEditForm($movie);
+        $tags = $this->get('axioma.manager.tag')->findTagsLimited();
 
         return $this->render('AxiomaMovieBundle:Movie:edit.html.twig', [
-            'entity' => $movie,
-            'form'   => $form->createView(),
+            'tags' => $tags,
+            'form' => $form->createView(),
         ]);
     }
 

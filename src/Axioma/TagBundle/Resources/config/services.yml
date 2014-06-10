@@ -1,4 +1,6 @@
 parameters:
+    axioma.entity.tag.class: Axioma\TagBundle\Entity\Tag
+    axioma.manager.tag.class: Axioma\TagBundle\EntityManager\TagManager
     axioma.type.tags_input.class: Axioma\TagBundle\Form\Type\TagsTextInputType
 
 services:
@@ -7,3 +9,9 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: form.type, alias: tags }
+
+    axioma.manager.tag:
+        class: %axioma.manager.tag.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %axioma.entity.tag.class%

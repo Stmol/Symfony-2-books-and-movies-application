@@ -37,11 +37,21 @@
   <div class="form-group">
     {{ form_errors(form.tags) }}
     {{ form_label(form.tags, 'book.tags'|trans) }}
-    {{ form_widget(form.tags) }} <br/>
-    <span class="text-muted">{{ 'span.tags.comma'|trans }}</span>
+      {{ form_widget(form.tags, { 'attr': { 'class': 'form-control' }, 'id': 'tags' }) }} <br/>
+    <span class="help-block">{{ 'span.tags.comma'|trans }}</span>
   </div>
 
-  {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}
+  {% if tags is defined %}
+    <div class="panel panel-default">
+      <div id="tags-list" class="panel-body">
+        {% for tag in tags %}
+          <span class="label label-info tag">{{ tag.name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-success' } }) }}
 
 {{ form_end(form) }}
 
@@ -70,11 +80,27 @@
         .appendTo(authorsList);
   };
 
+  var onTagClick = function (e) {
+    e.preventDefault();
+
+    var $tagsInput = $('#tags');
+    var tagsList = (0 === $tagsInput.val().length)
+        ? []
+        : $tagsInput.val().split(',');
+
+    tagsList.push($(e.target).text());
+    $tagsInput.val(tagsList.join(','));
+  };
+
   $(function () {
     $('#add-author').on('click', addAuthorField);
 
     $('#authors-list').find('a.remove-author').each(function () {
       $(this).on('click', removeAuthorField);
+    });
+
+    $('#tags-list').children('.tag').each(function () {
+      $(this).on('click', onTagClick);
     });
   });
 </script>

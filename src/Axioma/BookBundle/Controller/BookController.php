@@ -67,9 +67,10 @@ class BookController extends Controller
     {
         $book = $this->getBookManager()->createBook();
         $form = $this->createCreateForm($book);
+        $tags = $this->get('axioma.manager.tag')->findTagsLimited();
 
         return $this->render('AxiomaBookBundle:Book:new.html.twig', [
-            'book' => $book,
+            'tags' => $tags,
             'form' => $form->createView(),
         ]);
     }
@@ -91,11 +92,11 @@ class BookController extends Controller
         }
 
         $form = $this->createEditForm($book);
-        $deleteForm = $this->createDeleteForm($book->getId());
+        $tags = $this->get('axioma.manager.tag')->findTagsLimited();
 
         return $this->render('AxiomaBookBundle:Book:edit.html.twig', [
-            'form'        => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'tags' => $tags,
+            'form' => $form->createView(),
         ]);
     }
 

@@ -83,7 +83,7 @@ class TagsToStringTransformer implements DataTransformerInterface
             return new ArrayCollection();
         }
 
-        $names = mb_strtolower($names);
+        $names = strtolower($names);
 
         $namesArray = explode(self::TAGS_DELIMITER, $names);
         $namesArray = array_map('trim', $namesArray);
