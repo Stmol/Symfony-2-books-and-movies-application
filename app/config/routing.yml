@@ -6,3 +6,8 @@ axioma_book:
     resource: "@AxiomaBookBundle/Resources/config/routing.yml"
     prefix:   /
 
+homepage:
+    pattern:  /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /books/
