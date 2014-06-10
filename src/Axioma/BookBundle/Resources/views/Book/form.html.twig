@@ -11,19 +11,19 @@
 {{ form_start(form, { 'attr': { 'novalidate': 'novalidate' } }) }}
   <div class="form-group">
     {{ form_errors(form.title) }}
-    {{ form_label(form.title) }}
+    {{ form_label(form.title, 'book.title') }}
     {{ form_widget(form.title, { 'attr': { 'class': 'form-control' } }) }}
   </div>
 
   <div class="form-group">
     {{ form_errors(form.description) }}
-    {{ form_label(form.description) }}
+    {{ form_label(form.description, 'book.description') }}
     {{ form_widget(form.description, { 'attr': { 'class': 'form-control' } }) }}
   </div>
 
   <div class="form-group" >
     {{ form_errors(form.authors) }}
-    {{ form_label(form.authors) }}
+    {{ form_label(form.authors, 'book.authors') }}
 
     <div id="authors-list" data-prototype="{{ _self.widget_prototype(form.authors.vars.prototype)|e }}">
       {% for authorFiled in form.authors %}
@@ -32,6 +32,13 @@
     </div>
     <a href="#" id="add-author">{{ 'actions.add_author'|trans }}</a>
     {% do form.authors.setRendered %}
+  </div>
+
+  <div class="form-group">
+    {{ form_errors(form.tags) }}
+    {{ form_label(form.tags, 'book.tags'|trans) }}
+    {{ form_widget(form.tags) }} <br/>
+    <span class="text-muted">{{ 'span.tags.comma'|trans }}</span>
   </div>
 
   {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}

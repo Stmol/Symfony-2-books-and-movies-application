@@ -26,6 +26,9 @@ class BookType extends AbstractType
                     'required' => false,
                 ]
             ])
+            ->add('tags', 'tags', [
+                'required' => false,
+            ])
         ;
     }
     

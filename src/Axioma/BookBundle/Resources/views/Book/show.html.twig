@@ -4,17 +4,29 @@
   <div class="row">
     <div class="col-md-12">
       <h2>{{ book.title }}</h2>
+
       <p class="lead">
         {{ book.description|default('') }}
       </p>
-      {% if book.authors|length > 0 %}
-      <h4>{{ 'h.authors'|trans }}</h4>
 
-      <ul class="list-unstyled">
-        {% for author in book.authors %}
-          <li>{{ author }}</li>
-        {% endfor %}
-      </ul>
+      {% if book.authors|length > 0 %}
+        <h4>{{ 'h.authors'|trans }}</h4>
+
+        <ul class="list-unstyled">
+          {% for author in book.authors %}
+            <li>{{ author }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if book.tags|length > 0 %}
+        <h4>{{ 'h.tags'|trans }}</h4>
+
+        <ul>
+          {% for tag in book.tags %}
+            <li>{{ tag.name }}</li>
+          {% endfor %}
+        </ul>
       {% endif %}
 
       <a href="{{ path('books_edit', { 'id': book.id }) }}">

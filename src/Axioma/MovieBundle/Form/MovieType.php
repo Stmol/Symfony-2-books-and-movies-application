@@ -38,6 +38,9 @@ class MovieType extends AbstractType
                     Movie::QUALITY_1080   => '1080p',
                 ],
             ])
+            ->add('tags', 'tags', [
+                'required' => false,
+            ])
         ;
     }
     

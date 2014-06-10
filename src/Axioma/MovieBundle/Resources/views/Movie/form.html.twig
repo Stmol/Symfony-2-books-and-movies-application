@@ -43,6 +43,13 @@
     {% do form.actors.setRendered %}
   </div>
 
+  <div class="form-group">
+    {{ form_errors(form.tags) }}
+    {{ form_label(form.tags, 'movie.tags'|trans) }}
+    {{ form_widget(form.tags) }} <br/>
+    <span class="text-muted">{{ 'span.tags.comma'|trans }}</span>
+  </div>
+
   {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}
 
 {{ form_end(form) }}

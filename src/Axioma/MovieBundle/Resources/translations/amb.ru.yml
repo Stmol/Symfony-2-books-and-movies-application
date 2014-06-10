@@ -12,8 +12,13 @@ movie:
     actions: Действия
     actors: Актеры
     quality: Качество
+    tags: Теги
 
 h:
     actors: Актеры
     add: Добавить фильм
     edit: Редактировать фильм
+    tags: Теги
+
+span:
+    tags.comma: Укажите теги через запятую

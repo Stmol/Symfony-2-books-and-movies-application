@@ -2,6 +2,8 @@
 
 namespace Axioma\MovieBundle\Entity;
 
+use Axioma\TagBundle\Entity\Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,6 +60,21 @@ class Movie
      */
     private $quality;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Axioma\TagBundle\Entity\Tag", inversedBy="movies", cascade={"persist"})
+     * @ORM\JoinTable(name="movies_tags")
+     */
+    private $tags;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -142,6 +159,8 @@ class Movie
      * Set quality
      *
      * @param string $quality
+     *
+     * @throws \InvalidArgumentException
      * @return Movie
      */
     public function setQuality($quality)
@@ -165,6 +184,9 @@ class Movie
         return $this->quality;
     }
 
+    /**
+     * @return array
+     */
     public static function getQualities()
     {
         return [
@@ -175,5 +197,38 @@ class Movie
             self::QUALITY_720,
             self::QUALITY_1080,
         ];
+    }
+
+    /**
+     * Add tags
+     *
+     * @param Tag $tags
+     * @return Movie
+     */
+    public function addTag(Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param Tag $tags
+     */
+    public function removeTag(Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

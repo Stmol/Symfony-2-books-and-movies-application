@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Axioma\BookBundle\AxiomaBookBundle(),
             new Axioma\MovieBundle\AxiomaMovieBundle(),
+            new Axioma\TagBundle\AxiomaTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

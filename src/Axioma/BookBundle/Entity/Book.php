@@ -2,6 +2,8 @@
 
 namespace Axioma\BookBundle\Entity;
 
+use Axioma\TagBundle\Entity\Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,22 @@ class Book
      * @ORM\Column(name="authors", type="simple_array", nullable=true)
      */
     private $authors;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Axioma\TagBundle\Entity\Tag", inversedBy="books", cascade={"persist"})
+     * @ORM\JoinTable(name="books_tags")
+     */
+    private $tags;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -119,5 +137,38 @@ class Book
     public function getAuthors()
     {
         return $this->authors;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param Tag $tags
+     * @return Book
+     */
+    public function addTag(Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param Tag $tags
+     */
+    public function removeTag(Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
